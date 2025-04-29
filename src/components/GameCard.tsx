@@ -3,7 +3,7 @@
 import React, { FC, useCallback } from "react";
 import { Game } from "@prisma/client";
 //import { BsFillPlayFill } from "react-icons/bs";
-import {FavoriteButton} from "@/components/FavoriteButton";
+//import {FavoriteButton} from "@/components/FavoriteButton";
 import useInfoModal from "@/hooks/useInfoMocal";
 //import { AiOutlineInfo } from "react-icons/ai";
 

@@ -5,7 +5,7 @@ import useInfoModal from "@/hooks/useInfoMocal";
 import useGame from "@/hooks/useGame";
 //import { AiOutlineClose } from "react-icons/ai";
 import PlayButton from "@/components/PlayButton";
-import {FavoriteButton} from "@/components/FavoriteButton";
+//import {FavoriteButton} from "@/components/FavoriteButton";
 import { X } from "lucide-react";
 
 interface InfoModalProps {

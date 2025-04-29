@@ -1,4 +1,4 @@
-"use client"
+/* "use client"
 
 import { useState } from "react"
 import { toggleFavorite } from "@/lib/actions/favorites"
@@ -28,4 +28,4 @@ export function FavoriteButton({ gameId, initialIsFavorite = false }:{gameId: st
       {isFavorite ? '❤️' : '🤍'}
     </button>
   )
-}
+} */
