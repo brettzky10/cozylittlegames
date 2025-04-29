@@ -58,7 +58,7 @@ const InfoModal: FC<InfoModalProps> = ({ visible, onClose }) => {
                 {game?.title}
               </p>
               <div className="flex flex-row items-center gap-4">
-                <PlayButton gameId={game?.id} />
+                <PlayButton gameLink={game?.id} />
                 {/* <FavoriteButton gameId={game?.id} /> */}
               </div>
             </div>

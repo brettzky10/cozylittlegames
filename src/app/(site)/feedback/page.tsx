@@ -24,7 +24,7 @@ export default function FeedbackPage() {
   const isOverLimit = characterCount > 500
 
   return (
-    <div className="container max-w-2xl py-10">
+    <div className="container max-w-2xl py-10 mx-auto">
       <Card>
         <CardHeader>
           <CardTitle>Submit Feedback</CardTitle>
@@ -35,7 +35,7 @@ export default function FeedbackPage() {
             <Alert className="mb-6 bg-green-50">
               <CheckCircle2 className="h-4 w-4 text-green-600" />
               <AlertTitle>Success!</AlertTitle>
-              <AlertDescription>Thank you for your feedback. We'll review it shortly.</AlertDescription>
+              <AlertDescription>Thank you for your feedback. We will review it shortly.</AlertDescription>
             </Alert>
           )}
 

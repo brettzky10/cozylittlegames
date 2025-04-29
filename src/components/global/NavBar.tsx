@@ -168,7 +168,7 @@ const AboutUsContent = () => {
         <div>
           <h2 className="mb-2 text-xl font-semibold text-white">About us</h2>
           <p className="mb-6 max-w-xs text-sm text-neutral-400">
-            Placeholder is the world's leading placeholder company.
+            Placeholder is the world is leading placeholder company.
           </p>
         </div>
         <a

@@ -1,4 +1,4 @@
-"use server"
+/* "use server"
 
 //import { auth } from "@/lib/auth"
 import  db  from "@/lib/prisma-db"
@@ -88,4 +88,4 @@ export async function toggleFavorite(gameId: string) {
     console.error("Error toggling favorite:", error)
     throw new Error(`Failed to toggle favorite: ${error.message}`)
   }
-}
+} */
