@@ -1,12 +1,19 @@
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card'
+import Link from 'next/link'
 import React from 'react'
 
 const SmallDefendersPage = () => {
   return (
-    <div>
+    <div className='mt-5'>
          <Card className='p-5 m-10'>
-            <CardHeader>
-                Small Defenders
+            <CardHeader className='space-y-10'>
+                <Button asChild size={"sm"}>
+                <Link href="/">
+                Go Back
+                </Link>
+                </Button><span className='text-3xl font-bold '>Small Defenders</span>
+                
             </CardHeader>
             <CardDescription className='p-5 pb-10'>
                 Defend your king from the terrifying average goblin invaders.

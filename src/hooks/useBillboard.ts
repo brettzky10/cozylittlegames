@@ -1,4 +1,4 @@
-import useSWR from "swr";
+/* import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
 const useBillboard = () => {
@@ -14,4 +14,4 @@ const useBillboard = () => {
   return { data, error, isLoading, mutate };
 };
 
-export default useBillboard;
+export default useBillboard; */

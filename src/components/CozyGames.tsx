@@ -18,7 +18,7 @@ const CozyGames = () => {
         <Card
           heading="Mleep"
           description="Mleep fruit farmer simulator."
-          imgSrc="/images/mleep.png"
+          imgSrc="/images/mleepfruit.png"
           link="/cozy/mleep"
         />
         {/* <Card

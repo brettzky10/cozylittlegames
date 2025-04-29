@@ -1,4 +1,4 @@
-"use client"
+/* "use client"
 
 import React, { FC, useCallback, useEffect, useState } from "react";
 import useInfoModal from "@/hooks/useInfoMocal";
@@ -59,7 +59,7 @@ const InfoModal: FC<InfoModalProps> = ({ visible, onClose }) => {
               </p>
               <div className="flex flex-row items-center gap-4">
                 <PlayButton gameLink={game?.id} />
-                {/* <FavoriteButton gameId={game?.id} /> */}
+                <FavoriteButton gameId={game?.id} />
               </div>
             </div>
           </div>
@@ -79,3 +79,4 @@ const InfoModal: FC<InfoModalProps> = ({ visible, onClose }) => {
 };
 
 export default InfoModal;
+ */

@@ -4,7 +4,7 @@ import { useState } from "react"
 import Navbar from "@/components/Navbar"
 import Billboard from "@/components/Billboard"
 import GameList from "@/components/GameList"
-import InfoModal from "@/components/InfoModal"
+//import InfoModal from "@/components/InfoModal"
 import useInfoModal from "@/hooks/useInfoMocal"
 import CozyGames from "./CozyGames"
 import Testimonials from "./Testimonials"
@@ -25,7 +25,7 @@ export default function ClientHome({ }: ClientHomeProps) { //initialFavorites
 
   return (
     <>
-      <InfoModal onClose={closeModal} visible={isOpen} />
+      {/* <InfoModal onClose={closeModal} visible={isOpen} /> */}
       <Navbar />
       <Billboard />
       <CozyGames/>

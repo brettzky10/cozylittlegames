@@ -1,4 +1,4 @@
-import useSWR from "swr";
+/* import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
 const useGame = (gameId: string) => {
@@ -14,4 +14,4 @@ const useGame = (gameId: string) => {
   return { data, error, isLoading, mutate };
 };
 
-export default useGame;
+export default useGame; */
