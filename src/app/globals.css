@@ -92,3 +92,167 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
+
+.mleep-fruit {
+  animation: mleep-grow 10s infinite ease-out;
+  transform-origin: center 70%;
+}
+.mleep-plus-one {
+  opacity: 0;
+  animation: mleep-plus-one 10s infinite ease-out;
+  transform-origin: center center;
+}
+
+@keyframes mleep-grow {
+  0% {
+      transform-origin: center 70%;
+      transform: scale(0.1);
+  }
+
+  75% {
+      transform-origin: center 70%;
+      transform: scale(1.12, 1.25)
+  }
+  85% {
+      opacity: 1;
+      transform-origin: center 70%;
+      transform: scale(1.12, 1.25) 
+          translate(0, -50px)
+  }
+  95%, 100% {
+      opacity: 0;
+      transform-origin: center center;
+      transform: 
+          rotate(20deg)
+          translate(0, -80px)
+  }
+}
+@keyframes mleep-plus-one {
+  0%, 85% {
+      opacity: 0;
+      transform: scale(0.9);
+  }
+  90%, 95% {
+      opacity: 1;
+      transform: scale(1);
+  }
+  100% {
+      opacity: 0;
+  }
+
+}
+
+.jurt {
+  animation: jurt-move 6s infinite ease-in-out;
+  transform-origin: center;
+}
+.jurt-side-fin {
+  animation: jurt-side-fin-move 6s infinite ease-in-out;
+  transform-origin: center;
+}
+.jurt-head-fin {
+  animation: jurt-head-fin-move 6s infinite ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes jurt-move {
+  0% {
+      transform: rotate(5deg)
+  }
+  50% {
+      transform: rotate(-5deg)
+  }
+  100% {
+      transform: rotate(5deg)
+  }
+}
+@keyframes jurt-side-fin-move {
+  0% {
+      transform: rotate(-3deg);
+  }
+  50% {
+      transform: rotate(3deg);
+  }
+  100% {
+      transform: rotate(-3deg);
+  }
+}
+@keyframes jurt-head-fin-move {
+  0% {
+      transform: skew(-3deg);
+  }
+  50% {
+      transform: skew(3deg);
+  }
+  100% {
+      transform: skew(-3deg);
+  }
+}
+
+.farmer-speak .dog-lower-jaw {
+  animation: farmer-lower-jaw-speak 3s infinite ease-in-out;
+  transform-origin: left center;
+}
+.farmer-speak .dog-upper-jaw {
+  animation: farmer-upper-jaw-speak 3s infinite ease-in-out;
+  transform-origin: left center;
+}
+.farmer-speak .dog-hat {
+  animation: farmer-hat-speak 3s infinite ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes farmer-lower-jaw-speak {
+  0% {
+      transform: rotate(0)
+  }
+  20% {
+      transform: rotate(3deg)
+  }
+  30% {
+      transform: rotate(0)
+  }
+  45% {
+      transform: rotate(4deg)
+  }
+  68%, 100% {
+      transform: rotate(0)
+  }
+}
+@keyframes farmer-upper-jaw-speak {
+  0% {
+      transform: rotate(0)
+  }
+  20% {
+      transform: rotate(-1deg)
+  }
+  30% {
+      transform: rotate(0)
+  }
+  45% {
+      transform: rotate(-1deg)
+  }
+  68%, 100% {
+      transform: rotate(0)
+  }
+}
+@keyframes farmer-hat-speak {
+  0% {
+      transform: rotate(0)
+  }
+  20% {
+      transform: rotate(-1deg)
+  }
+  30% {
+      transform: rotate(0)
+  }
+  45% {
+      transform: rotate(-1deg)
+  }
+  68%, 100% {
+      transform: rotate(0)
+  }
+}
