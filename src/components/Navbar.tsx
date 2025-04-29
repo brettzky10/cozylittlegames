@@ -43,7 +43,7 @@ const Navbar = () => {
         }`}
       >
         <Link href={"/"}>
-          <img src="/images/logo.png" alt="logo" className="h-4 lg:h-7" />
+          <img src="/images/logo.png" alt="logo" className="h-10 lg:h-14" />
         </Link>
         <div className="ml-8 hidden flex-row gap-7 lg:flex">
           <NavbarItem label="Home" />
