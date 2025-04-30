@@ -3,6 +3,7 @@ import { Globe } from "lucide-react"
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "../ui/button"
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -10,6 +11,7 @@ export function Footer() {
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="space-y-3">
+            <Image src="/images/logo.png" width={54} height={54} alt="" />
             <h3 className="text-sm font-medium">Questions? Contact us.</h3>
             <ul className="space-y-2 text-xs">
               <li>
@@ -87,17 +89,20 @@ export function Footer() {
                   Contact Us
                 </Link>
               </li>
+              <li>
+              <Link href="/feedback">
+            <Button>
+                Feedback
+            </Button>
+            </Link>
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-8 flex flex-col space-y-4">
           <div className="w-full max-w-[200px]">
-            <Link href="/feedback">
-            <Button>
-                Feedback
-            </Button>
-            </Link>
+           
             {/* <Select>
               <SelectTrigger className="bg-transparent border border-gray-600 text-gray-400 rounded h-10">
                 <Globe className="mr-2 h-4 w-4" />
