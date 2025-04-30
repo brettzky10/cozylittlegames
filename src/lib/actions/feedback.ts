@@ -10,6 +10,7 @@ const feedbackSchema = z.object({
     errorMap: () => ({ message: "Please select a valid game" }),
   }),
   description: z.string().max(500, "Description must be 500 characters or less"),
+  rating: z.coerce.number().min(1, "Please provide a rating").max(5, "Rating must be between 1 and 5"),
 })
 
 export async function submitFeedback(prevState: any, formData: FormData) {
@@ -20,6 +21,7 @@ export async function submitFeedback(prevState: any, formData: FormData) {
       overview: formData.get("overview"),
       game: formData.get("game"),
       description: formData.get("description"),
+      rating: formData.get("rating"),
     })
 
     if (!validatedFields.success) {
@@ -29,7 +31,7 @@ export async function submitFeedback(prevState: any, formData: FormData) {
       }
     }
 
-    const { email, overview, game, description } = validatedFields.data
+    const { email, overview, game, description, rating } = validatedFields.data
 
     // Get game display name
     const gameDisplayNames = {
@@ -44,6 +46,7 @@ export async function submitFeedback(prevState: any, formData: FormData) {
       overview,
       game: gameDisplayNames[game],
       description,
+      rating,
     })
 
     return {

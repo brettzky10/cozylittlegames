@@ -6,7 +6,8 @@ import MobileMenu from "@/components/MobileMenu";
 import { useCallback, useEffect, useState } from "react";
 import AccountMenu from "@/components/AccountMenu";
 import Link from "next/link";
-import { Bell, ChevronDown, Search } from "lucide-react";
+import { Bell, ChevronDown, MessageCircle, Search } from "lucide-react";
+import { Button } from "./ui/button";
 
 const TOP_OFFSET = 66;
 
@@ -46,12 +47,9 @@ const Navbar = () => {
           <img src="/images/logo.png" alt="logo" className="h-10 lg:h-14" />
         </Link>
         <div className="ml-8 hidden flex-row gap-7 lg:flex">
-          <NavbarItem label="Home" />
-          <NavbarItem label="Series" />
-          <NavbarItem label="Films" />
-          <NavbarItem label="New & Popular" />
-          <NavbarItem label="My List" />
-          <NavbarItem label="Browse by languages" />
+          <NavbarItem link="/" label="Home" />
+          <NavbarItem link="/" label="Popular" />
+          <NavbarItem link="/" label="New" />
         </div>
         <div className="ml-8 flex cursor-pointer flex-row items-center gap-2 lg:hidden">
           <p className="text-sm text-white">Browse</p>
@@ -64,12 +62,18 @@ const Navbar = () => {
           <MobileMenu visible={showMobileMenu} />
         </div>
         <div className="ml-auto flex flex-row items-center gap-7">
-          <div className="cursor-pointer text-gray-200 transition hover:text-gray-300">
+          {/* <div className="cursor-pointer text-gray-200 transition hover:text-gray-300">
             <Search />
           </div>
           <div className="cursor-pointer text-gray-200 transition hover:text-gray-300">
             <Bell />
-          </div>
+          </div> */}
+          <Button className="rounded-sm bg-zinc-100/80 text-black hover:text-black hover:bg-zinc-500" asChild>
+            <Link href={"/feedback"}>
+            <MessageCircle/>
+            Feedback
+            </Link>
+          </Button>
 
           <div
             onClick={toggleAccountMenu}

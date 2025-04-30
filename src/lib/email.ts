@@ -5,9 +5,10 @@ type FeedbackEmailProps = {
   overview: string
   game: string
   description: string
+  rating: number
 }
 
-export async function sendFeedbackEmail({ userEmail, overview, game, description }: FeedbackEmailProps) {
+export async function sendFeedbackEmail({ userEmail, overview, game, description, rating }: FeedbackEmailProps) {
   const adminEmail = process.env.ADMIN_EMAIL
 
   if (!adminEmail) {
@@ -46,6 +47,7 @@ ${description}
 <p><strong>From:</strong> ${userEmail}</p>
 <p><strong>Game:</strong> ${game}</p>
 <p><strong>Overview:</strong> ${overview}</p>
+<p><strong>Rating:</strong> ${rating}</p>
 <h3>Description:</h3>
 <p>${description.replace(/\n/g, "<br>")}</p>
     `,

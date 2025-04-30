@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useFormState } from "react-dom"
 import { submitFeedback } from "@/lib/actions/feedback"
 import { Button } from "@/components/ui/button"
@@ -9,8 +9,10 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { AlertCircle, CheckCircle2 } from "lucide-react"
+import { AlertCircle, CheckCircle2, Star } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 const initialState = {
   success: false,
@@ -20,8 +22,30 @@ const initialState = {
 export default function FeedbackPage() {
   const [state, formAction] = useFormState(submitFeedback, initialState)
   const [description, setDescription] = useState("")
+  const [rating, setRating] = useState(0)
+  const [hoveredRating, setHoveredRating] = useState(0)
   const characterCount = description.length
   const isOverLimit = characterCount > 500
+  const router = useRouter()
+
+    // Show toast notifications when state changes
+    useEffect(() => {
+      if (state.success) {
+        toast.success("Thank you for your feedback!", {
+          description: "We will review it shortly.",
+          icon: <CheckCircle2 className="h-5 w-5" />,
+        })
+        router.push("/")
+      }
+  
+      if (state.error) {
+        toast.error("Error submitting feedback", {
+          description: state.error,
+          icon: <AlertCircle className="h-5 w-5" />,
+        })
+      }
+    }, [state])
+
 
   return (
     <div className="container max-w-2xl py-10 mx-auto">
@@ -72,6 +96,38 @@ export default function FeedbackPage() {
               </Select>
             </div>
 
+            <Card className="border-dashed">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base">Rate Your Experience</CardTitle>
+                <CardDescription>How would you rate your experience with this game?</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-center space-x-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => {
+                        setRating(star)
+                      }}
+                      onMouseEnter={() => setHoveredRating(star)}
+                      onMouseLeave={() => setHoveredRating(0)}
+                      className="p-1 transition-all focus:outline-none"
+                      aria-label={`Rate ${star} stars out of 5`}
+                    >
+                      <Star
+                        className={`h-8 w-8 ${
+                          star <= (hoveredRating || rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                        } transition-colors`}
+                      />
+                    </button>
+                  ))}
+                </div>
+                <input type="hidden" name="rating" value={rating} />
+                {rating === 0 && <p className="text-xs text-center mt-2 text-amber-600">Please select a rating</p>}
+              </CardContent>
+            </Card>
+
             <div className="space-y-2">
               <div className="flex justify-between">
                 <Label htmlFor="description">Description</Label>
@@ -94,7 +150,7 @@ export default function FeedbackPage() {
               )}
             </div>
 
-            <Button type="submit" className="w-full" disabled={isOverLimit}>
+            <Button type="submit" className="w-full" disabled={isOverLimit || rating === 0}>
               Submit Feedback
             </Button>
           </form>
