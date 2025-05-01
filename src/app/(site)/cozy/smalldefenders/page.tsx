@@ -49,14 +49,17 @@ const SmallDefendersPage = () => {
             🎯 Click on units to issue direct commands.<br/>
             👷‍♂️ Deploy workers to:<br/>
             <br/>
-            🌲 Log trees<br/>
+                    🌲 Log trees<br/>
             <br/>
-            ⛏️ Mine for gold<br/>
+                    ⛏️ Mine for gold<br/>
             <br/>
-            🏗️ Build structures<br/>
+                    🏗️ Build structures<br/>
             <br/>
-            🆓 Completely FREE to play — no paywalls, just strategy and skill!<br/>
-            📅 Progress: 2 of 13 levels complete as of April 2025. Stay tuned for more!<br/>
+            🆓 Completely FREE to play!<br/>
+            📅 Progress: <br/>
+                <s>- 2 levels complete as of April 2025.</s> <br/>
+                - 3 levels complete as of May 2025. <br/>
+                Stay tuned for more!<br/>
                 </p>
             
             </CardFooter>

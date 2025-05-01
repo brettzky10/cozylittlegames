@@ -1,0 +1,204 @@
+// MleepFruit.tsx
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+
+export interface MleepFruitProps extends React.SVGProps<SVGSVGElement> {
+  className?: string;
+}
+
+const MleepPage = React.forwardRef<SVGSVGElement, MleepFruitProps>(
+    ({ className, ...props }, ref) => {
+        const fruitRef = useRef<SVGSVGElement>(null);
+        const [visible, setVisible] = useState(true);
+        const [bees, setBees] = useState<Array<{ id: number; direction: "left" | "right" }>>([]);
+        const [score, setScore] = useState(0);
+        const [message, setMessage] = useState<string | null>(null);
+        const idCounterRef = useRef(0);
+    
+        const spawnBee = () => {
+          setBees((prev) => [
+            ...prev,
+            { id: idCounterRef.current++, direction: "left" },
+            { id: idCounterRef.current++, direction: "right" },
+          ]);
+        };
+    
+        const handleBeeRemove = (id: number, clicked = false) => {
+          setBees((prev) => prev.filter((bee) => bee.id !== id));
+          if (clicked) {
+            setScore((prev) => prev + 1);
+            setMessage("Bee zapped!");
+            setTimeout(() => setMessage(null), 1000);
+          }
+        };
+    
+        const Bumblebee = ({ id, direction }: { id: number; direction: "left" | "right" }) => {
+          const beeRef = useRef<HTMLDivElement>(null);
+    
+          useEffect(() => {
+            const bee = beeRef.current;
+            const fruit = fruitRef.current;
+            if (!bee || !fruit) return;
+    
+            let frame = 0;
+            let animId: number;
+    
+            const animate = () => {
+              const frequency = 0.05;
+              const amplitude = 20;
+              const speed = 1;
+    
+              // Increase travel distance on larger screens
+              const travelDistance = window.innerWidth > 1024 ? 2000 : 1000;
+    
+              const x =
+                direction === "left"
+                  ? travelDistance - frame * speed
+                  : frame * speed;
+              const y = window.innerHeight / 2 + Math.sin(frame * frequency) * amplitude;
+    
+              bee.style.transform = `translate(${x}px, ${y}px)`;
+    
+              const beeMidX = x + bee.offsetWidth / 2;
+              const beeMidY = y + bee.offsetHeight / 2;
+              const fruitBox = fruit.getBoundingClientRect();
+              const fruitMidX = fruitBox.left + fruitBox.width / 2;
+              const fruitMidY = fruitBox.top + fruitBox.height / 2;
+    
+              const dist = Math.hypot(beeMidX - fruitMidX, beeMidY - fruitMidY);
+    
+              if (dist < 50) {
+                setScore((prev) => prev - 1);
+                setMessage("Mleep fruit eaten!");
+                setTimeout(() => setMessage(null), 1000);
+                setVisible(false);
+                handleBeeRemove(id);
+                return;
+              }
+    
+              frame++;
+              animId = requestAnimationFrame(animate);
+            };
+    
+            animId = requestAnimationFrame(animate);
+            return () => cancelAnimationFrame(animId);
+          }, [direction, id]);
+    
+          return (
+            <div
+              ref={beeRef}
+              onClick={() => handleBeeRemove(id, true)}
+              className="fixed top-0 w-8 h-8 bg-yellow-400 rounded-full border-2 border-black z-50 cursor-pointer"
+            />
+          );
+        };
+    
+        useEffect(() => {
+          // Start by spawning bees on mount
+          spawnBee();
+        }, []);
+    
+        return (
+          <>
+            {message && (
+              <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white border border-black rounded px-4 py-2 z-50 shadow-lg">
+                {message}
+              </div>
+            )}
+            <div className="fixed top-0 left-0 p-4 text-lg font-bold z-50 text-black bg-white border border-black rounded">
+              Score: {score}
+            </div>
+            {visible &&
+              bees.map((bee) => (
+                <Bumblebee key={bee.id} id={bee.id} direction={bee.direction} />
+              ))}
+            {visible && (
+              <svg
+                ref={(node) => {
+                  if (typeof ref === "function") ref(node);
+                  else if (ref) ref.current = node;
+                  fruitRef.current = node;
+                }}
+                className={className}
+                viewBox="0 0 479.977 748.462"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                {...props}
+              >
+                
+                
+                <g className="mleep-fruit">
+            <g className="mleep-body">
+                <radialGradient id="SVGID_1_" cx="221.4883" cy="386.1353" r="211.4975" gradientUnits="userSpaceOnUse">
+                    <stop  offset="0.5806" stopColor="#9B8C64"/>
+                    <stop  offset="1" stopColor="#000000"/>
+                </radialGradient>
+                <path fill="url(#SVGID_1_)" stroke="#000000" strokeWidth="3" strokeMiterlimit="10" d="M383.82,344.755
+                    c6.562-2.766,11.168-9.256,11.168-16.822c0-10.08-8.171-18.25-18.25-18.25c-4.941,0-9.416,1.971-12.702,5.16
+                    c-30.071-36.541-74.493-59.66-124.048-59.66c-49.438,0-93.764,23.01-123.832,59.402c-3.259-3.033-7.615-4.902-12.418-4.902
+                    c-10.079,0-18.25,8.17-18.25,18.25c0,7.41,4.424,13.773,10.768,16.633c-12.913,24.653-20.268,52.979-20.268,83.116
+                    c0,95.27,73.425,172.5,164,172.5c90.574,0,164-77.23,164-172.5C403.988,397.624,396.672,369.364,383.82,344.755z"/>
+                
+                    <radialGradient id="SVGID_2_" cx="373.3203" cy="325.5884" r="25.2965" fx="350.076" fy="315.6075" gradientUnits="userSpaceOnUse">
+                    <stop  offset="0.5806" stopColor="#9B8C64"/>
+                    <stop  offset="1" stopColor="#000000"/>
+                    </radialGradient>
+                <circle fill="url(#SVGID_2_)" cx="377.238" cy="329.183" r="17"/>
+                <radialGradient id="SVGID_3_" cx="98.0703" cy="315.5884" r="35.1877" gradientUnits="userSpaceOnUse">
+                    <stop  offset="0.5806" stopColor="#9B8C64"/>
+                    <stop  offset="1" stopColor="#000000"/>
+                </radialGradient>
+                <circle fill="url(#SVGID_3_)" cx="103.238" cy="327.433" r="17"/>
+            </g>
+            <g className="mleep-stem">
+                <path fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round" strokeMiterlimit="10" d="M245.55,255.849
+                    c0,0,14.926-33.957-16.562-52.666"/>
+                <path d="M292.963,186.933c0,0-1.234,19.196-13.832,31.852c-12.597,12.656-31.787,13.98-31.787,13.98s1.235-19.195,13.832-31.852
+                    C273.773,188.257,292.963,186.933,292.963,186.933z"/>
+            </g>
+            <g className="mleep-face">
+                <g>
+                    
+                        <ellipse transform="matrix(0.7943 -0.6076 0.6076 0.7943 -138.5371 164.4878)" cx="173.613" cy="286.807" rx="4.875" ry="3.375"/>
+                    
+                        <ellipse transform="matrix(-0.7943 -0.6076 0.6076 -0.7943 375.4423 700.7454)" cx="306.363" cy="286.807" rx="4.875" ry="3.375"/>
+                </g>
+                <path fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" d="
+                    M189.558,305.224c-0.708-1.584,11.585,4.959,11.585,4.959h0.014c0,0-0.98-15.377,37.894-3.996
+                    c0.365,0.107,0.892,0.291,0.952,0.273c0.401-0.121,0.799-0.238,1.192-0.352c38.604-11.23,37.626,4.074,37.626,4.074
+                    s12.293-6.543,11.585-4.959"/>
+            </g>
+        </g>
+        <polygon className="mleep-pot" points="395.488,524.85 84.488,524.85 84.488,616.85 127.977,616.85 158.488,739.85 322.488,739.85 352.047,616.85 
+            395.488,616.85 		"/>
+        <g className="mleep-plus-one">
+                <path d="M252.918,303.635c0,1.381-0.691,2.446-2.072,3.193c-1.381,0.75-2.994,1.324-4.832,1.726
+                    c-1.844,0.405-3.686,0.664-5.525,0.777c-1.842,0.116-3.166,0.173-3.969,0.173c-2.305,0.115-4.574,0.202-6.818,0.259
+                    c-2.244,0.059-4.461,0.086-6.646,0.086c-0.115,0.807-0.201,2.045-0.258,3.711c-0.061,1.67-0.174,3.568-0.346,5.696
+                    c-0.174,2.131-0.404,4.315-0.691,6.56s-0.719,4.289-1.295,6.128c-0.576,1.843-1.236,3.396-1.984,4.661
+                    c-0.75,1.268-1.699,1.958-2.848,2.071c-1.613,0.116-2.965-1.093-4.057-3.625c-1.096-2.53-1.984-5.438-2.676-8.717
+                    c-0.691-3.28-1.209-6.474-1.553-9.581c-0.346-3.106-0.578-5.178-0.691-6.214c-1.268,0-3.512-0.027-6.732-0.086
+                    c-3.223-0.057-6.559-0.229-10.012-0.519c-3.451-0.285-6.502-0.804-9.148-1.553c-2.648-0.747-3.971-1.869-3.971-3.366
+                    c0-2.071,1.381-3.625,4.143-4.661c2.764-1.035,5.926-1.753,9.494-2.157c3.566-0.402,7.049-0.575,10.443-0.519
+                    c3.395,0.06,5.725,0.087,6.992,0.087v-3.28c0-1.148,0.086-3.163,0.258-6.041c0.174-2.875,0.574-5.81,1.209-8.804
+                    c0.631-2.991,1.494-5.61,2.59-7.854c1.092-2.244,2.615-3.366,4.574-3.366c1.609,0,2.875,1.324,3.797,3.97
+                    c0.92,2.648,1.58,5.64,1.984,8.977c0.402,3.339,0.633,6.589,0.691,9.753c0.057,3.166,0.086,5.265,0.086,6.3
+                    c2.186,0.116,4.373,0.202,6.561,0.259c2.184,0.06,4.371,0.146,6.559,0.26c0.805,0,2.129,0.059,3.971,0.172
+                    c1.84,0.116,3.711,0.375,5.609,0.777c1.898,0.404,3.566,0.979,5.006,1.726C252.197,301.364,252.918,302.37,252.918,303.635z"/>
+                <path d="M303.184,264.279c0,3.567-0.061,7.136-0.174,10.702c-0.115,3.568-0.23,7.137-0.344,10.702
+                    c-0.232,5.869-0.346,11.711-0.346,17.521c0,5.813-0.172,11.651-0.518,17.521c-0.117,1.958-0.232,4.574-0.346,7.854
+                    c-0.115,3.28-0.547,6.503-1.295,9.667c-0.75,3.166-1.928,5.929-3.539,8.285c-1.611,2.36-3.855,3.539-6.73,3.539
+                    c-2.764,0-5.006-0.949-6.732-2.848c-1.727-1.899-3.08-4.315-4.057-7.25c-0.979-2.935-1.641-6.215-1.986-9.84
+                    c-0.344-3.625-0.547-7.19-0.604-10.702c-0.059-3.509-0.029-6.759,0.086-9.753c0.113-2.991,0.174-5.292,0.174-6.904
+                    c0-7.824,0.027-15.648,0.086-23.476c0.057-7.825,0.143-15.649,0.258-23.477c-2.303-1.955-4.115-4.342-5.438-7.163
+                    c-1.324-2.818-1.984-5.724-1.984-8.718c0-4.717,1.408-8.744,4.229-12.083c2.82-3.336,6.703-5.006,11.652-5.006
+                    c4.256,0,7.596,1.613,10.012,4.833c2.416,3.224,4.17,7.078,5.266,11.565c1.092,4.488,1.752,9.063,1.984,13.724
+                    C303.066,257.632,303.184,261.403,303.184,264.279z"/>
+        </g>
+        </svg>
+        )}
+      </>
+    );
+  }
+);
+export default MleepPage
