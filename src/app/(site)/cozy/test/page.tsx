@@ -1,4 +1,4 @@
-// MleepFruit.tsx
+/* // MleepFruit.tsx
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -201,4 +201,14 @@ const MleepPage = React.forwardRef<SVGSVGElement, MleepFruitProps>(
     );
   }
 );
-export default MleepPage
+export default MleepPage */
+
+import React from 'react'
+
+const TestPage = () => {
+  return (
+    <div>TestPage</div>
+  )
+}
+
+export default TestPage
